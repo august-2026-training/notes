@@ -120,6 +120,45 @@ CHECKLIST FOR BACKEND APPLICATION
 7. Spring Security with JWT
 8. Clean code with proper naming convention 
 
+WT Algorithm
+--------------
+generating JWT token
+--------------------
+1. upon successful authentication by authentication manager, generate JWT token
+2. usually we can pass the user name and generate token
+3. this is done in the /api/users/login endpoint
+
+
+validating JWT token
+--------------------
+
+-----> request----->JwtFilterChain-------> /api/users (PUT)
+
+
+
+JwtFilterChain algorithm
+1. check if Authorization header is present
+2. If not present, let the request reach the endpoint and return
+3. If the Authorization header is present
+	- Take out the value   (Bearer <jwt>)
+	- Cut off the first 7 characters and keep the token in jwt variable
+4. if the username is not null and security context does not have the authenticated information
+	- fetch the complete user info by username
+	- next validate the token by extracting all the claimns
+	- if token is tampered, an exception is thrown
+	- else return true
+5. if token is valid
+	- set the spring security context with the username and roles
+6. pass the token to the intended endpoint
+		
+
+avoid updating another customer's profile by passing their id in path variable or request body
+---------------------------------------------------------------------------------------------
+1. Dont pass id in path variable or request body
+2. instead from the jwt token extract the username
+3. then fetch the user info from db by calling findByUserName()
+4. then use the id from that fetched record to update the profile
+
 OPTIONAL CHECKLIST FOR BACKEND APPLICATION
 -------------------------------------------
 1. Pagination, sorting and filtering
