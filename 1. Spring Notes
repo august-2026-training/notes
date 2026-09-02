@@ -120,7 +120,14 @@ CHECKLIST FOR BACKEND APPLICATION
 7. Spring Security with JWT
 8. Clean code with proper naming convention 
 
-WT Algorithm
+OPTIONAL CHECKLIST FOR BACKEND APPLICATION
+-------------------------------------------
+1. Pagination, sorting and filtering
+2. Spring AOP(Aspect Oriented Programming)
+3. Inheritance Strategies
+4. Microservices
+
+JWT Algorithm
 --------------
 generating JWT token
 --------------------
@@ -159,11 +166,5 @@ avoid updating another customer's profile by passing their id in path variable o
 3. then fetch the user info from db by calling findByUserName()
 4. then use the id from that fetched record to update the profile
 
-OPTIONAL CHECKLIST FOR BACKEND APPLICATION
--------------------------------------------
-1. Pagination, sorting and filtering
-2. Spring AOP(Aspect Oriented Programming)
-3. Inheritance Strategies
-4. Microservices
 
 
