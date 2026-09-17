@@ -1,0 +1,49 @@
+Element			Type		Purpose
+--------------------------------------------------
+<BrowserRouter>		Component	Wraps the entire application to synchronize your UI with the browser's HTML5 History API.
+<Routes> & <Route>	Components	Works as a matching container. <Route> maps a specific path (e.g., /about) to a React element.
+<Link> & <NavLink>	Components	Replaces traditional <a> tags. It prevents page reloads and can dynamically style itself if active.
+useNavigate()		Hook		Allows you to redirect users programmatically via code .
+useParams()		Hook		Extracts dynamic URL variables (like retrieving the numeric id from /user/42).
+
+
+steps for routing in react
+---------------------------
+1. install react-router-dom libraries
+	npm install react-router-dom
+2. configure the route paths for your components in App.jsx
+3. to do step 2 we need (BrowserRouter>, <Routes>, <Route>)
+4. test the routes in the browser
+5. but this doesn't help, we have to dynamically change the url
+6. this can be done in 2 ways
+	a. use <Link> component
+	b. programmatically navigate using useNavigate() hook
+		a. Use <Link> component
+			- create a <Header> component
+			- use <Link> components instead of <a>
+			- include <Header> component inside <BrowserRouter> in App.jsx 
+		b. programmatically navigate using useNavigate() hook
+			- import { useNavigate } from "react-router-dom";
+			- const navigate = useNavigate();
+			- navigate("/fruitlist");
+
+7. Nested routes
+	- configure the nested child routes in App.jsx
+	- create a kind of a dashboard component with a nav header and use <Outlet> component
+8. Pass Route parameters
+	- define the route path with route param as
+		<Route path="/dash/movies/edit/:movId" element={<MovieEdit />} />
+	- to retrieve the route param use the useParams hook in the component
+
+Steps to attach login component
+-------------------------------
+1. Create the Login component, and capture login form data
+2. create userService.js to consume endpoints for login and register
+3. create authService.js to do auth related tasks such as storeJwt, retrieveJwt, removeJwt, storeUser, getUser, isLoggedIn, isAdmin, isCustomer
+4. upon successful login
+	- store the userInfo using authService
+	- store the jwt token using authService
+	- navigate to /dash
+5. in dashboard component conditionally render the Links based on role of the user
+6. create logout link and navigate to login component
+7. in login component, when the component mounts for the first time clear session storage
